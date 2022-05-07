@@ -20,3 +20,21 @@ export const getOneUser = async (req, res) => {
 
     res.status(200).send(getOneUser)
 }
+
+export const deleteOneUser = async (req, res) => {
+    const {id} = req.params;
+
+    const deletedUser = await UserSchema.findByIdAndDelete(id)
+
+    res.status(200).send(deletedUser)
+}
+
+export const updateOneUser = async (req, res) => {
+    const {id} = req.params;
+
+    const updatedUser = await UserSchema.findByIdAndUpdate(id, req.body, {
+        new: true
+    })
+
+    res.status(200).send(updatedUser)
+}
