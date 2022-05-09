@@ -9,8 +9,15 @@ export const CreateUser = (req, res) => {
 }
 
 export const getAllUser = async (req, res) => {
-    const userData = await UserSchema.find();
-    res.status(200).send(userData)
+    if(req.query.keyword){
+        const userData = await UserSchema.find({email: req.query.keyword})
+        res.status(200).send(userData)
+    }
+    else{
+        const userData = await UserSchema.find();
+        res.status(200).send(userData)
+    }
+
 }
 
 export const getOneUser = async (req, res) => {
